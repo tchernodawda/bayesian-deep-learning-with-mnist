@@ -6,15 +6,14 @@
 ![Pyro](https://img.shields.io/badge/Pyro-1.x-8B4513?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=flat-square&logo=python&logoColor=white)
 ![Jupyter](https://img.shields.io/badge/Jupyter-notebook-F37626?style=flat-square&logo=jupyter&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
-**Implementing Bayesian Neural Networks from scratch and with Pyro — quantifying epistemic uncertainty on MNIST digit classification and testing out-of-distribution detection on KMNIST.**
+**Implementing Bayesian Neural Networks from scratch and with Pyro, quantifying epistemic uncertainty on MNIST digit classification and testing out-of-distribution detection on KMNIST.**
 
 </div>
 
 ## Overview
 
-Standard neural networks produce point estimates — a single prediction with no indication of how confident the model is. **Bayesian Neural Networks (BNNs)** treat weights as probability distributions rather than fixed values, enabling the model to express *how uncertain it is* about each prediction.
+Standard neural networks produce point estimates, a single prediction with no indication of how confident the model is. **Bayesian Neural Networks (BNNs)** treat weights as probability distributions rather than fixed values, enabling the model to express *how uncertain it is* about each prediction.
 
 This project implements BNNs in four progressive steps, from manual derivation to hybrid CNN architectures, applied to handwritten digit classification on the MNIST dataset.
 
@@ -22,7 +21,7 @@ This project implements BNNs in four progressive steps, from manual derivation t
 
 ### Bayesian Neural Networks
 
-Each weight `w` is modelled as a Gaussian distribution `N(μ, σ²)` rather than a scalar. At each forward pass, weights are **sampled** from these distributions — the model effectively runs multiple different networks and aggregates their predictions.
+Each weight `w` is modelled as a Gaussian distribution `N(μ, σ²)` rather than a scalar. At each forward pass, weights are **sampled** from these distributions, the model effectively runs multiple different networks and aggregates their predictions.
 
 ### Variational Inference & ELBO
 
@@ -45,7 +44,7 @@ This makes the sampling step differentiable with respect to `μ` and `σ`.
 
 | Type | Source | Reducible? |
 |---|---|---|
-| **Epistemic** | Model uncertainty — limited data or unseen distributions | Yes, with more data |
+| **Epistemic** | Model uncertainty, limited data or unseen distributions | Yes, with more data |
 | **Aleatoric** | Inherent noise in the data | No |
 
 ### Out-of-Distribution (OOD) Detection
@@ -56,12 +55,12 @@ A well-calibrated BNN should output **high uncertainty** on inputs it has never 
 
 The notebook is organised into four parts:
 
-### Part 1 — Setup & Data Loading
+### Part 1: Setup & Data Loading
 - MNIST dataset loading and normalisation (mean=0.1307, std=0.3081)
 - DataLoaders with batch size 128 (train) / 256 (test)
 - Reproducibility seed setup
 
-### Part 2 — Manual BNN (Bayes by Backprop)
+### Part 2: Manual BNN (Bayes by Backprop)
 
 Full from-scratch implementation in PyTorch:
 
@@ -71,7 +70,7 @@ Full from-scratch implementation in PyTorch:
 - **`evaluate_with_uncertainty`** — runs `num_samples=50` stochastic forward passes per input, computes mean prediction, variance (uncertainty), and confidence
 - **Calibration metrics** — NLL (Negative Log-Likelihood) and ECE (Expected Calibration Error) with 15-bin binning
 
-### Part 3 — Specialised Libraries (Pyro)
+### Part 3: Specialised Libraries (Pyro)
 
 Same model reimplemented with **Pyro** (probabilistic programming on top of PyTorch):
 
@@ -80,7 +79,7 @@ Same model reimplemented with **Pyro** (probabilistic programming on top of PyTo
 - **SVI (Stochastic Variational Inference)** with `Trace_ELBO` loss
 - Comparison of manual vs Pyro implementations on accuracy, NLL, confidence
 
-### Part 4 — Hybrid Bayesian CNN
+### Part 4: Hybrid Bayesian CNN
 
 Production-oriented architecture combining convolutional feature extraction with Bayesian classification:
 
@@ -145,8 +144,8 @@ bayesian-deep-learning-with-mnist/
 
 ## Contributors
 
-**Thierno Daouda LY · Michel Junior DELANOUE**
+**Thierno Daouda LY & Michel Junior DELANOUE**
 
 ## License
 
-MIT License — see [LICENSE](LICENSE) for details.
+See [LICENSE](LICENSE) for details.
